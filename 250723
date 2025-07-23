@@ -1,0 +1,428 @@
+TIL
+
+[유용한 VS CODE 단축키](https://inpa.tistory.com/entry/VS-Code-%E2%8F%B1%EF%B8%8F-%EC%9C%A0%EC%9A%A9%ED%95%9C-%EB%8B%A8%EC%B6%95%ED%82%A4-%EC%A0%95%EB%A6%AC)
+
+### def 끝에 return 이냐 pass냐도 중요
+
+**`return`:**
+
+- `return` 키워드는 함수의 실행 결과를 반환하고 함수를 종료하는 데 사용됩니다. 함수 내부에서 `return` 문을 만나면 함수의 실행이 즉시 중단되고, 해당 값을 호출한 곳으로 반환합니다.
+- 반환 값은 숫자, 문자열, 리스트 등 다양한 데이터 유형이 될 수 있습니다.
+- `return` 문이 없는 경우, 함수는 `None` 값을 반환합니다.
+
+**`pass`:**
+
+- `pass` 키워드는 아무 동작도 수행하지 않고 단순히 코드를 건너뛸 때 사용됩니다.
+- 주로 구문상 블록이 필요하지만, 아직 해당 블록에 실행할 코드가 없을 때 사용됩니다. 예를 들어, 함수나 클래스를 정의할 때, 또는 조건문이나 반복문 내에서 아무 동작도 수행하지 않도록 할 때 사용됩니다.
+
+### map() 학습
+
+[<참고자료1>](https://bluese05.tistory.com/58)
+
+- `map(함수, 대상)`
+- map() 함수는 built-in 함수로 list 나 dictionary 와 같은 iterable 한 데이터를 인자로 받아 list 안의 개별 item을 함수의 인자로 전달하여 결과를 list로 형태로 반환해 주는 함수이다.
+
+```python
+num = [1, 2, 3]
+sq_num = map(square_fnc, num)
+sq_num = [1, 4, 9]
+```
+
+### global 선언과 조작은 동시에 수행할 수 없다.
+
+```python
+# 틀린 예
+global pro_num += 1
+
+# 옳은 예
+global pro_num
+pro_num += 1
+```
+
+### 변수에 담긴 값의 boolean을 출력할 수 있다.
+
+- bool 클래스를 이용해서.
+    
+    ```python
+    empty_list = []
+    print(bool(empty_list))
+    
+    ```
+    
+
+### 이터레이터
+
+[map과_지연평가_hard.md](attachment:c5555a69-0e78-41ed-926a-9513526a86e3:map과_지연평가_hard.md)
+
+[map과_지연평가_easy.md](attachment:2566ef84-91e4-49d5-a071-e1648efeabb5:map과_지연평가_easy.md)
+
+### sort()와 sorted()는 다르다.
+
+- [sort()와 sorted()는 다르다](https://blog.naver.com/wideeyed/221745416992)
+- `sorted()`는 내장함수
+- `sort()`는 리스트형의 메소드
+    - 정렬된 값이 리턴되지 않음.
+    - 리턴값은 None.
+    - 원본 리스트 값이 정렬된 값으로 수정될 뿐.
+
+### lambda 심화학습
+
+`lambda 매개변수 : 표현식`
+
+```markdown
+(lambda x,y: x + y)(10, 20)  # 30
+```
+
+### GLOBAL 심화학습
+---
+---
+---
+
+# 매개변수와 인자는 다르다.
+
+### 매개변수와 인자
+
+- (0) 매개변수와 인자는 다른거에요!
+    - **매개변수(parameter)**
+        - (정의) 함수를 정의할 때, 함수가 받을 값을 나타내는 변수
+    - **인자(argument)**
+        - (정의) 함수를 호출할 때, 실제로 전달되는 값
+        
+        ```python
+        def add_numbers(x, y):      # x와 y는 매개변수(parameter)
+            result = x + y
+            return result
+        
+        a = 2
+        b = 3
+        
+        sum_result = add_numbers(a, b)  # a와 b는 인자(argument)
+        
+        print(sum_result)
+        ```
+        
+- (1) 다양한 인자 종류
+    1. **위치 인자(Positional Arguments)**
+        1. 함수 호출 시 인자의 위치에 따라 전달되는 인자
+        2. 위치 인자는 함수 호출 시 반드시 값을 전달해야 함
+            
+            ```python
+            def greet(name, age):
+                print(f'안녕하세요, {name}님! {age}살이시군요.')
+            
+            greet('Alice', 25)   # 안녕하세요, Alice님! 25살이시군요.
+            greet(25, 'Alice')   # 안녕하세요, 25님! Alice살이시군요.
+            greet('Alice')       # TypeError: greet() missing 1 required positional argument: 'age'
+            ```
+            
+    
+    1. **기본 인자 값 (Default Argument Values)**
+        1. 함수 정의에서 매개변수에 기본 값을 할당하는 것
+        2. 함수 호출 시 인자를 전달하지 않으면, 기본값이 매개변수에 할당됨
+            
+            ```python
+            def greet(name, age=30):
+                print(f'안녕하세요, {name}님! {age}살이시군요.')
+            
+            greet('Bob')         # 안녕하세요, Bob님! 30살이시군요.
+            greet('Charlie', 40) # 안녕하세요, Charlie님! 40살이시군요.
+            ```
+            
+    
+    1. **키워드 인자(Keyword Arguments)**
+        1. 함수 호출 시 인자의 이름과 함께 값을 전달하는 인자
+        2. 매개변수와 인자를 일치시키지 않고, 특정 매개변수에 값을 할당할 수 있음
+        3. 인자의 순서는 중요하지 않으며, 인자의 이름을 명시하여 전달
+        4. 단, 호출 시 키워드 인자는 위치 인자 뒤에 위치해야 함!
+            - 키워드 인자 → 위치 인자 순서는 불가능함.
+            
+            ```python
+            def greet(name, age):
+                print(f'안녕하세요, {name}님! {age}살이시군요.')
+            
+            greet(name='Dave', age=35)   # 안녕하세요, Dave님! 35살이시군요.
+            greet(age=35, name='Dave')   # 안녕하세요, Dave님! 35살이시군요. # 가능!!
+            
+            greet(age=35, 'Dave')        # positional argument follows keyword argument
+            ```
+            
+        
+    2. **임의의 인자 목록(Arbitrary Argument Lists)**
+        1. 정해지지 않은 개수의 인자를 처리하는 인자
+        2. 함수 정의 시 매개변수 앞에 *을 붙여 사용
+        3. 여러 개의 인자를 tuple로 처리
+            - 어떤 것(str, int,…)을 넣어도 type 출력하면 죄다 tuple로 나옴
+            
+            ```python
+            def calculate_sum(*args):
+                print(args)          # (1, 100, 5000, 30)
+                print(type(args))    # <class 'tuple'>
+            
+            calculate_sum(1, 100, 5000, 30)
+            ```
+            
+    3. **임의의 키워드 인자 목록(Arbitrary Keyword Argument Lists)**
+        1. 정해지지 않은 개수의 키워드 인자를 처리하는 인자
+        2. 함수 정의 시 매개변수 앞에 ‘**’를 붙여 사용
+        3. 여러 개의 인자를 dictionary로 묶어 처리
+        - 넣은 값을 딕셔너리로 처리함.
+            
+            ```python
+            def print_info(**kwargs):
+            	print(kwargs)
+            	
+            print_info(name = 'Eve', age = 30) # {'name' : 'Eve', 'age' : 30}
+            ```
+            
+
+- 함수 인자 권장 작성 순서
+    - 위치 → 기본 → 가변 → 가변 키워드
+    - 호출 시 인자를 전달하는 과정에서 혼란을 줄일 수 있도록 함
+
+# LEGB Rule
+### 함수와 Scope
+
+- **(0) 함수와 Scope**
+    - scope : python의 범위
+        - 함수는 코드 내부에 local scope를 생성하며, 그 외 공간인 global scope로 구분
+    - 범위와 변수 관계
+        - Scope
+            - global scope : 코드 어디에서든 참조할 수 있는 공간
+            - local scope : 함수가 만든 scope(함수 내부에서만 참조 가능)
+        - variable
+            - global variable : global scope에 정의된 변수
+            - local variable : local scope에 정의된 변수
+        
+        → scope는 변수의 수명주기와 연관이 있음
+        
+    - 변수 수명주기(life cycle)
+        - 변수의 수명주기는 변수가 선언되는 위치와 scope에 따라 결정됨
+            1. **built-in scope**
+                - 파이썬이 실행된 이후부터 영원히 유지
+            2. **global scope**
+                - 모듈이 호출된 시점 이후 혹은 인터프리터가 끝날 때까지 유지
+            3. **local scope**
+                - 함수가 호출될 때 생성되고, 함수가 종료될 때까지 유지
+    - 이름 검색 규칙(Name Resolution)
+        - 파이썬에서 사용되는 이름들은 특정한 이름공간에 저장되어 있다
+        - 아래와 같은 순서로 이름을 찾아 나가며, LEGB Rule이라고 부른다.
+
+    1. **Local scope** : 지역 범위 (현재 작업 중인 범위)
+2. **Enclosed scope** : 지역 범위 한 단계 위 범위
+3. **Global scope** : 최상단에 위치한 범위
+4. **Built-in scope** : 모든 것을 담고 있는 범위
+    
+    (정의하지 않고 사용할 수 있는 모든 것)
+    
+    ```python
+    print(sum)                # <built-in function sum>
+    print(sum(range(3)))      # 3
+    
+    sum = 5                   # 'sum' 이름을 global에서 정수로 재정의
+    
+    print(sum)                # 5
+    print(sum(range(3)))      # TypeError: 'int' object is not callable
+    ```
+    
+- ** 함수 내에서는 바깥 Scope의 변수에 접근 가능하나, 수정은 할 수 없다.
+
+**참고 문제 (** 함수가 (어디서) 호출되었는가도 살펴볼 필요가 있음)**
+
+```python
+x = 'G'
+y = 'G'
+
+def outer_func():
+    x = 'E'
+    y = 'E'
+
+    def inner_func(y):
+        z = 'L'
+        print(x, y, z)  # E P L
+
+    inner_func('P')
+    print(x, y)        # E E
+
+outer_func()
+print(x, y)            # G G
+```
+
+① **G (Global) 영역**
+
+- `x = 'G'`, `y = 'G'`
+
+② **E (Enclosing) 영역**: `outer_func()`
+
+- `x = 'E'`, `y = 'E'`
+
+③ **inner_func(y)` 함수**
+
+- `y`는 파라미터로, Local 변수처럼 취급됨
+- 함수 안에는 `x`가 없지만, `z`는 있음
+
+④ `print(x, y, z)`
+
+- `x`: L(없음) → E(찾음) → `'E'`
+- `y`: L(파라미터 y 존재) → 전달받은 `'P'`
+- `z`: L(찾음) → `'L'`
+    
+    → 결과: `E P L`
+    
+
+⑤ `inner_func('P')`
+
+- `'P'`라는 값을 인자로 전달
+
+⑥ `print(x, y)` in `outer_func`
+
+- `x`, `y`: 모두 Local 영역에서 `'E'`를 찾음
+    
+    → 결과: `E E`
+    
+
+⑦ `print(x, y)` in global
+
+- `x`, `y`: Global 영역에서 `'G'`를 찾음
+    
+    → 결과: `G G`
+    
+- **(1) global 키워드**
+    - 변수의 스코프를 전역 범위로 지정하기 위해 사용
+    - 일반적으로 함수 내에서 전역 변수를 수정하려는 경우에 사용
+    
+    - 주의사항 ← 어차피 에러가 나서 잘 수정하면 됨 ㅎ.
+        - global 키워드 선언 전에 참조 불가
+            
+            ```python
+            num = 0
+            
+            def increment():
+                # SyntaxError: name 'num' is used prior to global declaration
+                print(num)       # ❌ 오류 발생 위치
+                global num
+                num += 1
+            ```
+            
+        - 매개변수에는 global 키워드 사용 불가
+
+
+        
+    # packing 과 unpacking
+    ### Packing(넣은 걸 자동으로 묶어서 받고) & Unpacking(묶어서 넣으면 자동으로 풀어서 받고) ← 파이썬의 입장에서 packing 과 unpacking
+
+- (1) 패킹 packing
+    - 여러 개의 데이터를 하나의 컬렉션으로 모아 담는 과정
+    - (기본 원리)
+        - 여러 개의 값을 하나의 튜플로 묶는 파이썬의 기본 동작
+        - 한 변수에 콤마(,)로 구분된 값을 넣으면 자동으로 튜플로 처리
+    - (예시)
+        - *을 활용한 패킹
+            
+            ```python
+            def my_func(*args):             #args 말고 다른 애들 넣어도 됩니당
+                print(args)           # (1, 2, 3, 4, 5)
+                print(type(args))     # <class 'tuple'>
+            
+            my_func(1, 2, 3, 4, 5)
+            ```
+            
+        - **을 활용할 패킹
+            
+            ```python
+            def my_func2(**kwargs):
+                print(kwargs)           # {'a': 1, 'b': 2, 'c': 3}
+                print(type(kwargs))     # <class 'dict'>
+            
+            my_func2(a=1, b=2, c=3)
+            ```
+            
+        - print 함수의 패킹 예시
+            - print 함수에서 임의의 가변 인자를 작성할 수 있었던 이유
+                - 인자 개수에 상관없이 튜플 하나로 패킹되어 내부에서 처리되기 때문
+                    
+                    ```python
+                    print(*objects, sep=' ', end='\n', file=sys.stdout, flush=False)
+                    ```
+                    
+                - 📌 인자별 설명
+                    
+                    
+                    | 인자 | 설명 |
+                    | --- | --- |
+                    | `*objects` | 출력할 여러 개의 값(객체). 쉼표로 구분해서 여러 개 전달 가능. 예: `print(1, 2, 3)`은 `1 2 3`을 출력. |
+                    | `sep=' '` | 각 `object` 사이에 넣을 문자열. 기본값은 `' '` (공백). 예: `print(1, 2, 3, sep='-')` → `1-2-3` |
+                    | `end='\n'` | 출력 후 끝에 붙일 문자열. 기본값은 줄바꿈(`'\n'`). 예: `print("hello", end='!')` → `hello!` |
+                    | `file=sys.stdout` | 출력할 대상. 기본은 표준 출력(`stdout`)이지만, 파일 객체를 넣으면 파일에 출력됨. 예: `print("hello", file=f)` |
+                    | `flush=False` | 출력 버퍼를 강제로 비울지 여부. `True`이면 바로 출력, `False`이면 내부 버퍼를 따름. 실시간 로그 출력 시 `flush=True`를 씀. |
+- **(2) 언패킹 unpacking ← 주로 호출할 때**
+    - 컬렉션에 담겨있는 데이터들을 개별 요소로 펼쳐 놓는 과정
+    - (기본 원리)
+        - 튜플이나 리스트 등의 객체의 요소들을 개별 변수에 할당
+        - ‘시퀀스 언패킹(Sequence Unpacking)’ 또는 ‘다중 할당(Multiple Assignment)’이라고 부름.
+        - (예시)
+        - 튜플을 할당할 때 `*`
+        - 딕셔너리를 할당할 때 `**`
+            
+            ```python
+            def my_function(x, y, z):
+                print(x, y, z)
+            
+            names = ['alice', 'jane', 'peter']
+            my_function(*names)   # alice jane peter
+            ```
+            
+            ```python
+            def my_function(x, y, z):
+                print(x, y, z)
+            
+            my_dict = {'x': 1, 'y': 2, 'z': 3}
+            my_function(**my_dict)    # 1 2 3
+            ```
+            
+    
+    ## Packing & Unpacking,  & `*` 정리
+
+# 함수와 반환
+- 함수와 반환
+    - 파이썬 return, 반환의 원칙
+        - 파이썬 함수는 언제나 **단 하나의 값(객체)**만 반환할 수 있음
+        - 여러 값을 반환하는 것처럼 보여도, 실제로는 **하나의 튜플로 패킹되어 반환**
+            
+            ```python
+            def get_user_info():
+                name = 'Alice'
+                age = 30
+                # 콤마(,)로 여러 값을 반환하는 것처럼 보임
+                return name, age
+            
+            # 반환된 값을 user_data 변수에 담아 확인해보면
+            user_data = get_user_info()
+            
+            # 단 하나의 튜플을 반환하는 것
+            print(user_data)  # ('Alice', 30)
+            ```
+            
+        - (핵심)
+            - 파이썬 함수는 오직 **하나의 값(객체)**만 `return`할 수 있음
+            - `return a, b, c`처럼 콤마를 사용하면, 파이썬이 값을 **하나의 튜플로 자동 패킹**하여 반환
+            - 반환된 튜플은 **각 변수에 언패킹**하여 사용할 수 있음
+
+
+
+# 람다 표현식
+- 람다 표현식← 일회용으로 자주 사용하는 간단한 함수!
+    - 익명 함수를 만드는 데 사용되는 표현식
+    - 한 줄로 간단한 함수를 정의
+    - 구조
+        - `lambda 매개변수 : 표현식`
+        - lambda input:output
+        - lambda 키워드
+            - 람다 함수를 선언하기 위해 사용되는 키워드
+        - 매개변수
+            - 함수에 전달되는 매개변수들
+            - 여러 개의 매개변수가 있을 경우 쉼표로 구분
+        - 표현식
+            - 함수의 실행되는 코드 블록으로, 결과값을 반환하는 표현식으로 작성
+            - (예시)
+                - 간단한 연산이나 함수를 한 줄로 표현할 때 사용
+                - 함수를 매개변수로 전달하는 경우에도 유용하게 활용
